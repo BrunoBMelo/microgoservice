@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/brunobmelo/consortium/route"
-)
+import porthttp "github.com/brunobmelo/consortium/port/http"
 
 func main() {
-	route.StartServer()
+	porthttp.RunServer()
 }
