@@ -1,7 +1,12 @@
 package porthttp
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/brunobmelo/consortium/adapter"
+	"github.com/brunobmelo/consortium/repository"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,19 +17,23 @@ type MapRoute struct {
 	IoC          func() interface{}
 }
 
-var mapRoutes = []MapRoute{
-	{
-		HttpMethod:   "GET",
-		RelativePath: "/consortium/offers/:id",
-		HandlerFunc:  adapter.GetConsortiumOffer,
-		IoC: func() interface{} {
-			return adapter.Di{
-				DB: nil,
-			}
-		},
-	},
-}
-
 func GetMapRoutes() []MapRoute {
-	return mapRoutes
+
+	cfg, err := config.LoadDefaultConfig(context.TODO())
+	if err != nil {
+		panic(err)
+	}
+
+	return []MapRoute{
+		{
+			HttpMethod:   "GET",
+			RelativePath: "/consortium/offers/:id",
+			HandlerFunc:  adapter.GetConsortiumOffer,
+			IoC: func() interface{} {
+				return adapter.Di{
+					DB: repository.New(dynamodb.NewFromConfig(cfg)),
+				}
+			},
+		},
+	}
 }
