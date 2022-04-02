@@ -7,7 +7,7 @@ import (
 func ConfigureRoutes(r *gin.Engine, maps []MapRoute) {
 	for _, mr := range maps {
 		if mr.HttpMethod == "GET" {
-			r.GET(mr.RelativePath, mr.HandlerFunc(mr.IoC))
+			r.GET(mr.RelativePath, mr.HandlerFunc(mr.IoC()))
 		}
 	}
 }

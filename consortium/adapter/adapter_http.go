@@ -46,7 +46,7 @@ func GetConsortiumOffer(v interface{}) gin.HandlerFunc {
 		}
 
 		if result == (offer.ConsortiumOffer{}) {
-			c.JSON(http.StatusBadRequest, gin.H{"message": "customer not exist"})
+			c.JSON(http.StatusBadRequest, gin.H{"message": "customer not found"})
 			return
 		}
 

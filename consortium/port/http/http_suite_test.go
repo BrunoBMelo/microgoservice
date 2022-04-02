@@ -2,6 +2,8 @@ package porthttp_test
 
 import (
 	"context"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/brunobmelo/consortium/adapter"
@@ -17,12 +19,29 @@ func TestPortHttp(t *testing.T) {
 	RunSpecs(t, "Http Suite")
 }
 
-var r *gin.Engine
+var _ = Describe("Check if the route is working normally", Label("PortHttp"), func() {
 
-var _ = Describe("", func() {
+	var r *gin.Engine
 
 	BeforeEach(func() {
-		startServer()
+		r = gin.Default()
+		porthttp.ConfigureRoutes(r, getMapsRoutes())
+	})
+
+	When("Make a call to the endpoint: /consortium/offers/:id", func() {
+		Context("and send an customerId that doesn't exist", func() {
+			It("Should return a message with statusCode:400 (BadRequest)", func() {
+
+				messageExpec := "{\"message\":\"customer not found\"}"
+				path := "/consortium/offers/idTest"
+				req, _ := http.NewRequest(http.MethodGet, path, nil)
+				w := httptest.NewRecorder()
+				r.ServeHTTP(w, req)
+
+				Expect(w).To(HaveHTTPBody(MatchJSON(messageExpec)), "the body should contain the value: %s", messageExpec)
+				Expect(w).To(HaveHTTPStatus(http.StatusBadRequest))
+			})
+		})
 	})
 })
 
@@ -39,12 +58,6 @@ func getMapsRoutes() []porthttp.MapRoute {
 			},
 		},
 	}
-}
-
-func startServer() {
-	r = gin.Default()
-	porthttp.ConfigureRoutes(r, getMapsRoutes())
-	r.Run(":3000")
 }
 
 type mockDb struct{}
