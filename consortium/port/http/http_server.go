@@ -2,7 +2,7 @@ package porthttp
 
 import "github.com/gin-gonic/gin"
 
-func StartServer() {
+func RunServer() {
 
 	r := gin.Default()
 
