@@ -30,7 +30,7 @@ var _ = Describe("Check if the route is working normally", Label("PortHttp"), fu
 	})
 
 	When("Make a call to the endpoint: /consortium/offers/:id", func() {
-		Context("and send an customerId that doesn't exist", func() {
+		Context("and send an customerId to get the offer", func() {
 			It("Should return a message with statusCode:400 (BadRequest)", func() {
 
 				messageExpec := "{\"message\":\"customer not found\"}"
