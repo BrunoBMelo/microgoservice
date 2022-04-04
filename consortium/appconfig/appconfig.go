@@ -2,22 +2,49 @@ package appconfig
 
 import (
 	"context"
+	"log"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	AwsConfig *aws.Config
+	PortApp          string
+	AwsConfig        *aws.Config
+	isDevelopment    bool
+	localstackRegion string
+	awsPartitionId   string
+	localstackUrl    string
 }
 
 func LoadConfig() Config {
 
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	configApp := Config{
+		PortApp:          os.Getenv("PORT"),
+		AwsConfig:        &aws.Config{},
+		isDevelopment:    false,
+		localstackRegion: os.Getenv("LOCALSTACK_AWS_REGION"),
+		awsPartitionId:   os.Getenv("LOCALSTACK_PARTITION_ID"),
+		localstackUrl:    os.Getenv("LOCALSTACK_URL"),
+	}
+
+	if os.Getenv("ENVIRONMENT") == "env" || os.Getenv("ENVIRONMENT") == "" {
+		configApp.isDevelopment = true
+	}
+
 	envDev := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
 		return aws.Endpoint{
-			PartitionID:   "aws",
-			URL:           "http://localhost:4566",
-			SigningRegion: "us-east-1",
+			PartitionID:   configApp.awsPartitionId,
+			URL:           configApp.localstackUrl,
+			SigningRegion: configApp.AwsConfig.Region,
 		}, nil
 	})
 
@@ -26,7 +53,7 @@ func LoadConfig() Config {
 		panic(err)
 	}
 
-	return Config{
-		AwsConfig: &cfg,
-	}
+	configApp.AwsConfig = &cfg
+
+	return configApp
 }

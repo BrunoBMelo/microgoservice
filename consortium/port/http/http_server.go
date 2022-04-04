@@ -6,14 +6,9 @@ import (
 )
 
 func RunServer() {
-
 	r := gin.Default()
-
 	cfg := appconfig.LoadConfig()
-
 	maps := GetMapRoutes(cfg)
-
 	ConfigureRoutes(r, maps)
-
-	r.Run(":8081")
+	r.Run(":" + cfg.PortApp)
 }
