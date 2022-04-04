@@ -1,3 +1,5 @@
+ 
+ #DRAFT
  aws dynamodb create-table --cli-input-json file://aws-create-table.json --endpoint-url http://localhost:4566
 
 
@@ -7,4 +9,13 @@ aws --endpoint-url=http://localhost:4566 dynamodb put-item \
 
 
 aws --endpoint-url=http://localhost:4566 \
-        dynamodb scan --table-name ConsortiumOffers
+        dynamodb scan --table-name consortium-offers >> result.txt
+
+
+          	echo creating table in aws-localstack dynamodb
+	aws dynamodb create-table --cli-input-json file://docker/aws-create-table.json --endpoint-url http://localhost:4566 >> ./docker/aws-dynamodb.txt
+	echo off sleep 5
+
+	echo add datas in table
+	aws --endpoint-url=http://localhost:4566 dynamodb put-item --table-name consortium-offers \
+	--item --cli-input-json file://aws-insert-data.json >> ./docker/aws-dynamodb-result.txt

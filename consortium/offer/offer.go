@@ -3,10 +3,10 @@ package offer
 import "context"
 
 type ConsortiumOffer struct {
-	CustomerId   string
-	Available    float64
-	PercentageAA float64
-	QuotaMax     int
+	CustomerId string `json:"customerid"`
+	Available  string `json:"available"`
+	Tax        string `json:"tax"`
+	Quota      int    `json:"quota"`
 }
 
 type IDatabase interface {

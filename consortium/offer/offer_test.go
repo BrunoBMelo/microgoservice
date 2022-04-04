@@ -32,9 +32,9 @@ var testTable = []struct {
 		CustomerId: "sxhgsedoasnashudhen",
 		Entity: ConsortiumOffer{
 			CustomerId:   "sxhgsedoasnashudhen",
-			Available:    1300.00,
-			PercentageAA: 2,
-			QuotaMax:     36,
+			Available:    "1300.00",
+			Tax: "2",
+			Quota:     36,
 		},
 	},
 }
@@ -44,8 +44,8 @@ type MockDb struct{}
 func (d MockDb) GetItem(ctx context.Context, customerId string) (ConsortiumOffer, error) {
 	return ConsortiumOffer{
 		CustomerId:   "sxhgsedoasnashudhen",
-		Available:    1300.00,
-		PercentageAA: 2,
-		QuotaMax:     36,
+		Available:    "1300.00",
+		Tax: "2",
+		Quota:     36,
 	}, nil
 }

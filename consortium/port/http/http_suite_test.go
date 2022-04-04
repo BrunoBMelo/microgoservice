@@ -91,8 +91,8 @@ func (mc mockDb) GetItem(ctx context.Context, customerId string) (offer.Consorti
 		return offer.ConsortiumOffer{
 			CustomerId:   "39819584-50b3-45ee-a4e9-ad4d3607b167",
 			Available:    13000.00,
-			PercentageAA: 0.02,
-			QuotaMax:     36,
+			Tax: 0.02,
+			Quota:     36,
 		}, nil
 	}
 

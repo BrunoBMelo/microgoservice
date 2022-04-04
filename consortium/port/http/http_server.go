@@ -1,14 +1,19 @@
 package porthttp
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/brunobmelo/consortium/appconfig"
+	"github.com/gin-gonic/gin"
+)
 
 func RunServer() {
 
 	r := gin.Default()
 
-	maps := GetMapRoutes()
+	cfg := appconfig.LoadConfig()
+
+	maps := GetMapRoutes(cfg)
 
 	ConfigureRoutes(r, maps)
 
-	r.Run(":8080")
+	r.Run(":8081")
 }
