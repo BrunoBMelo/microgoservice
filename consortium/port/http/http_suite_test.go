@@ -45,7 +45,7 @@ var _ = Describe("Check if the route is working normally", Label("PortHttp"), fu
 
 			It("Should return statusCode: 200 (Successed)", func() {
 
-				jsonExpec := "{\"CustomerId\":\"39819584-50b3-45ee-a4e9-ad4d3607b167\",\"Available\": 13000,\"PercentageAA\": 0.02,\"QuotaMax\": 36}"
+				jsonExpec := "{\"customerid\":\"39819584-50b3-45ee-a4e9-ad4d3607b167\",\"available\": \"13000.00\",\"tax\": \"0.02\",\"quota\": 36}"
 				path := "/consortium/offers/39819584-50b3-45ee-a4e9-ad4d3607b167"
 				req, _ := http.NewRequest(http.MethodGet, path, nil)
 				w := httptest.NewRecorder()
@@ -90,8 +90,8 @@ func (mc mockDb) GetItem(ctx context.Context, customerId string) (offer.Consorti
 	if customerId == "39819584-50b3-45ee-a4e9-ad4d3607b167" {
 		return offer.ConsortiumOffer{
 			CustomerId:   "39819584-50b3-45ee-a4e9-ad4d3607b167",
-			Available:    13000.00,
-			Tax: 0.02,
+			Available:    "13000.00",
+			Tax: "0.02",
 			Quota:     36,
 		}, nil
 	}

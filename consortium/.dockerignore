@@ -1,0 +1,7 @@
+init-scripts/*
+.env
+Makefile
+README
+.dockerignore
+consortium-compose.yaml
+consortium-deployment.yaml

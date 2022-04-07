@@ -21,39 +21,55 @@ type Config struct {
 
 func LoadConfig() Config {
 
-	err := godotenv.Load(".env")
+	configApp := Config{}
+	godotenv.Load()
 
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+	env := os.Getenv("ENVIRONMENT")
+	if env == "dev" {
 
-	configApp := Config{
-		PortApp:          os.Getenv("PORT"),
-		AwsConfig:        &aws.Config{},
-		isDevelopment:    false,
-		localstackRegion: os.Getenv("LOCALSTACK_AWS_REGION"),
-		awsPartitionId:   os.Getenv("LOCALSTACK_PARTITION_ID"),
-		localstackUrl:    os.Getenv("LOCALSTACK_URL"),
-	}
+		if err := godotenv.Load(".env"); err != nil {
+			log.Fatalf("Error loading .env file for development environment")
+		}
 
-	if os.Getenv("ENVIRONMENT") == "env" || os.Getenv("ENVIRONMENT") == "" {
 		configApp.isDevelopment = true
+		configApp.PortApp = os.Getenv("PORT")
+		configApp.localstackRegion = os.Getenv("LOCALSTACK_AWS_REGION")
+		configApp.awsPartitionId = os.Getenv("LOCALSTACK_PARTITION_ID")
+		configApp.localstackUrl = os.Getenv("LOCALSTACK_URL")
+
+		cfg, err := config.LoadDefaultConfig(context.TODO(),
+			config.WithEndpointResolverWithOptions(aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+				return aws.Endpoint{
+					PartitionID:   configApp.awsPartitionId,
+					URL:           configApp.localstackUrl,
+					SigningRegion: configApp.AwsConfig.Region,
+				}, nil
+			})))
+
+		if err != nil {
+			panic(err)
+		}
+
+		configApp.AwsConfig = &cfg
+
+	} else {
+
+		cfg, err := config.LoadDefaultConfig(context.Background())
+		if err != nil {
+			panic(err)
+		}
+
+		port := os.Getenv("PORT")
+		if port == "" {
+			panic("the port number cannot be empty")
+		}
+
+		configApp.PortApp = port
+		configApp.AwsConfig = &cfg
+		configApp.AwsConfig = &aws.Config{}
+		configApp.isDevelopment = false
+
 	}
-
-	envDev := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
-		return aws.Endpoint{
-			PartitionID:   configApp.awsPartitionId,
-			URL:           configApp.localstackUrl,
-			SigningRegion: configApp.AwsConfig.Region,
-		}, nil
-	})
-
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolverWithOptions(envDev))
-	if err != nil {
-		panic(err)
-	}
-
-	configApp.AwsConfig = &cfg
 
 	return configApp
 }
