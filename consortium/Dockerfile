@@ -1,11 +1,11 @@
 FROM golang:1.18-alpine as build
 WORKDIR /app
-COPY /go.mod go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download && go mod verify
-COPY ./ .
+COPY . .
 RUN CGO_ENABLED=0 go build -ldflags "-s -w" -installsuffix cgo -o /cmd/consortium
 
 FROM gcr.io/distroless/static
 COPY --from=build /cmd/consortium /
 EXPOSE 8081
-CMD ["/app"]
+CMD ["/consortium"]

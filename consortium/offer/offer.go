@@ -2,7 +2,7 @@ package offer
 
 import "context"
 
-type ConsortiumOffer struct {
+type Offer struct {
 	CustomerId string `json:"customerid"`
 	Available  string `json:"available"`
 	Tax        string `json:"tax"`
@@ -10,10 +10,10 @@ type ConsortiumOffer struct {
 }
 
 type IDatabase interface {
-	GetItem(ctx context.Context, customerId string) (ConsortiumOffer, error)
+	GetItem(ctx context.Context, customerId string) (Offer, error)
 }
 
-func GetConsortiumOffer(ctx context.Context, db IDatabase, customerId string) (ConsortiumOffer, error) {
+func GetConsortiumOffer(ctx context.Context, db IDatabase, customerId string) (Offer, error) {
 	result, err := db.GetItem(ctx, customerId)
 	return result, err
 }

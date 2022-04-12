@@ -1,9 +1,8 @@
-package adapter
+package offer
 
 import (
 	"net/http"
 
-	"github.com/brunobmelo/consortium/offer"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,10 +17,10 @@ type OfferInput struct {
 }
 
 type Di struct {
-	DB offer.IDatabase
+	DB IDatabase
 }
 
-func GetConsortiumOffer(v interface{}) gin.HandlerFunc {
+func ConsortiumOffer(v interface{}) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		env, err := TransformTo[Di](v)
@@ -38,14 +37,14 @@ func GetConsortiumOffer(v interface{}) gin.HandlerFunc {
 			return
 		}
 
-		result, err := offer.GetConsortiumOffer(c.Request.Context(), env.DB, reqInput.CustomerId)
+		result, err := GetConsortiumOffer(c.Request.Context(), env.DB, reqInput.CustomerId)
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
 
-		if result == (offer.ConsortiumOffer{}) {
+		if result == (Offer{}) {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "customer not found"})
 			return
 		}

@@ -7,7 +7,7 @@ import (
 
 func TestOffer(t *testing.T) {
 
-	for _, test := range testTable {
+	for _, test := range testTableToOffer {
 
 		mock := MockDb{}
 		got, err := GetConsortiumOffer(context.Background(), mock, test.CustomerId)
@@ -16,36 +16,36 @@ func TestOffer(t *testing.T) {
 			t.Errorf("Test Failed: The value return was err and it isnt expect -%s - testId: %d", err.Error(), test.TestId)
 		}
 
-		if got == (ConsortiumOffer{}) {
+		if got == (Offer{}) {
 			t.Errorf("Test Failed: The value returned is nil and it isnt expected - %v - testId: %d", got, test.TestId)
 		}
 	}
 }
 
-var testTable = []struct {
+var testTableToOffer = []struct {
 	TestId     int
 	CustomerId string
-	Entity     ConsortiumOffer
+	Entity     Offer
 }{
 	{
 		TestId:     1,
 		CustomerId: "sxhgsedoasnashudhen",
-		Entity: ConsortiumOffer{
-			CustomerId:   "sxhgsedoasnashudhen",
-			Available:    "1300.00",
-			Tax: "2",
-			Quota:     36,
+		Entity: Offer{
+			CustomerId: "sxhgsedoasnashudhen",
+			Available:  "1300.00",
+			Tax:        "2",
+			Quota:      36,
 		},
 	},
 }
 
 type MockDb struct{}
 
-func (d MockDb) GetItem(ctx context.Context, customerId string) (ConsortiumOffer, error) {
-	return ConsortiumOffer{
-		CustomerId:   "sxhgsedoasnashudhen",
-		Available:    "1300.00",
-		Tax: "2",
-		Quota:     36,
+func (d MockDb) GetItem(ctx context.Context, customerId string) (Offer, error) {
+	return Offer{
+		CustomerId: "sxhgsedoasnashudhen",
+		Available:  "1300.00",
+		Tax:        "2",
+		Quota:      36,
 	}, nil
 }

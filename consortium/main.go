@@ -1,7 +1,27 @@
 package main
 
-import porthttp "github.com/brunobmelo/consortium/port/http"
+import (
+	"github.com/BrunoBMelo/handlerhttp"
+	"github.com/brunobmelo/consortium/appconfig"
+	"github.com/brunobmelo/consortium/offer"
+	"github.com/gin-gonic/gin"
+)
+
+var r *gin.Engine
+var cfg appconfig.Config
+
+func init() {
+
+	cfg = appconfig.LoadConfig()
+	r = handlerhttp.New()
+	handlerhttp.ConfigureMapRoute(func() []handlerhttp.MapRoute {
+		return offer.GetMapRoutes(cfg)
+	})
+
+}
 
 func main() {
-	porthttp.RunServer()
+
+	r.Run(":"+cfg.PortApp)
+
 }

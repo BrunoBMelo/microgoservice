@@ -1,4 +1,4 @@
-package repository
+package offer
 
 import (
 	"context"
@@ -8,14 +8,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/brunobmelo/consortium/offer"
 )
 
 type Repository struct {
 	dbClient *dynamodb.Client
 }
 
-func (db Repository) GetItem(ctx context.Context, customerId string) (offer.ConsortiumOffer, error) {
+func (db Repository) GetItem(ctx context.Context, customerId string) (Offer, error) {
 
 	result, err := db.dbClient.GetItem(ctx, &dynamodb.GetItemInput{
 		Key: map[string]types.AttributeValue{
@@ -25,23 +24,23 @@ func (db Repository) GetItem(ctx context.Context, customerId string) (offer.Cons
 	})
 
 	if err != nil {
-		return offer.ConsortiumOffer{}, err
+		return Offer{}, err
 	}
 
 	if len(result.Item) == 0 {
-		return offer.ConsortiumOffer{}, errors.New("customer-id not found")
+		return Offer{}, errors.New("customer-id not found")
 	}
 
-	consortiumOffer := offer.ConsortiumOffer{}
+	consortiumOffer := Offer{}
 	err = attributevalue.UnmarshalMap(result.Item, &consortiumOffer)
 
 	if err != nil {
-		return offer.ConsortiumOffer{}, err
+		return Offer{}, err
 	}
 
 	return consortiumOffer, nil
 }
 
-func New(client *dynamodb.Client) Repository {
+func NewFromRepository(client *dynamodb.Client) Repository {
 	return Repository{dbClient: client}
 }

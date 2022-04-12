@@ -1,13 +1,11 @@
-package adapter
+package offer
 
 import (
 	"context"
 	"testing"
-
-	"github.com/brunobmelo/consortium/offer"
 )
 
-var testTable = []struct {
+var testsTableToTransformation = []struct {
 	From   interface{}
 	To     Di
 	TestId int
@@ -26,14 +24,14 @@ var testTable = []struct {
 func TestAdapterTransformationFunc(t *testing.T) {
 
 	func() {
-		for _, testTable := range testTable {
+		for _, testTableT := range testsTableToTransformation {
 
-			got, err := TransformTo[Di](testTable.From)
+			got, err := TransformTo[Di](testTableT.From)
 
 			if err != nil {
 				t.Error("Failed: The convert interface in struct fail.")
 			}
-			if got != testTable.To {
+			if got != testTableT.To {
 				t.Error("Failed: The value return is different of the expected.")
 			}
 			if got.DB == nil {
@@ -43,7 +41,7 @@ func TestAdapterTransformationFunc(t *testing.T) {
 			if err != nil {
 				t.Error("Failed: The err mock return not sholud has value.")
 			}
-			if result != (offer.ConsortiumOffer{}) {
+			if result != (Offer{}) {
 				t.Error("Failed: The result mock return not sholud has value.")
 			}
 		}
@@ -61,6 +59,6 @@ func TestAdapterTransformationFunc(t *testing.T) {
 
 type mockStruct struct{}
 
-func (c mockStruct) GetItem(ctx context.Context, customerId string) (offer.ConsortiumOffer, error) {
-	return offer.ConsortiumOffer{}, nil
+func (c mockStruct) GetItem(ctx context.Context, customerId string) (Offer, error) {
+	return Offer{}, nil
 }

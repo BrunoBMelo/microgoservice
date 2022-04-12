@@ -1,4 +1,4 @@
-package porthttp_test
+package offer
 
 import (
 	"context"
@@ -7,9 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/brunobmelo/consortium/adapter"
-	"github.com/brunobmelo/consortium/offer"
-	porthttp "github.com/brunobmelo/consortium/port/http"
+	"github.com/BrunoBMelo/handlerhttp"
 	"github.com/gin-gonic/gin"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -25,8 +23,8 @@ var _ = Describe("Check if the route is working normally", Label("PortHttp"), fu
 	var r *gin.Engine
 
 	BeforeEach(func() {
-		r = gin.Default()
-		porthttp.ConfigureRoutes(r, getMapsRoutes())
+		r = handlerhttp.New()
+		handlerhttp.ConfigureMapRoute(getMapsRoutes)
 	})
 
 	When("Make a call to the endpoint: /consortium/offers/:id", func() {
@@ -68,14 +66,14 @@ var _ = Describe("Check if the route is working normally", Label("PortHttp"), fu
 	})
 })
 
-func getMapsRoutes() []porthttp.MapRoute {
-	return []porthttp.MapRoute{
+func getMapsRoutes() []handlerhttp.MapRoute {
+	return []handlerhttp.MapRoute{
 		{
 			HttpMethod:   "GET",
 			RelativePath: "/consortium/offers/:id",
-			HandlerFunc:  adapter.GetConsortiumOffer,
+			HandlerFunc:  ConsortiumOffer,
 			IoC: func() interface{} {
-				return adapter.Di{
+				return Di{
 					DB: mockDb{},
 				}
 			},
@@ -85,20 +83,20 @@ func getMapsRoutes() []porthttp.MapRoute {
 
 type mockDb struct{}
 
-func (mc mockDb) GetItem(ctx context.Context, customerId string) (offer.ConsortiumOffer, error) {
+func (mc mockDb) GetItem(ctx context.Context, customerId string) (Offer, error) {
 
 	if customerId == "39819584-50b3-45ee-a4e9-ad4d3607b167" {
-		return offer.ConsortiumOffer{
-			CustomerId:   "39819584-50b3-45ee-a4e9-ad4d3607b167",
-			Available:    "13000.00",
-			Tax: "0.02",
-			Quota:     36,
+		return Offer{
+			CustomerId: "39819584-50b3-45ee-a4e9-ad4d3607b167",
+			Available:  "13000.00",
+			Tax:        "0.02",
+			Quota:      36,
 		}, nil
 	}
 
 	if customerId == "398195t4-50b3-45ee-a4e9-ad4d3607b167" {
-		return offer.ConsortiumOffer{}, errors.New("error")
+		return Offer{}, errors.New("error")
 	}
 
-	return offer.ConsortiumOffer{}, nil
+	return Offer{}, nil
 }
