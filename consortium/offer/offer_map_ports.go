@@ -5,7 +5,7 @@ import (
 
 	"github.com/BrunoBMelo/handlerhttp"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/brunobmelo/consortium/appconfig"
+	"github.com/BrunoBMelo/appconfig"
 )
 
 func GetMapRoutes(cfg appconfig.Config) []handlerhttp.MapRoute {

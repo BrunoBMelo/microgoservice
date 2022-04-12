@@ -1,3 +1,7 @@
+github.com/BrunoBMelo/appconfig v0.0.0-20220412113747-039fe5f6513d h1:kXqtPf1vQAoZdALa5xWz/9GNJQ7JliOXEhLLQRtBxnQ=
+github.com/BrunoBMelo/appconfig v0.0.0-20220412113747-039fe5f6513d/go.mod h1:siFQR2Iuy7XBM8w3dCAnmU20QbZhp6B4x+KplWjdUlY=
+github.com/BrunoBMelo/converter v1.0.0 h1:VTnezchdwxEd6DVzEfsYjU8L8Etul+LexJWVf2NEIfs=
+github.com/BrunoBMelo/converter v1.0.0/go.mod h1:Z5mMk7GYnKcJALU5cI92QS6E63pWoD7M9zw3d+TRrIg=
 github.com/BrunoBMelo/handlerhttp v1.0.0 h1:XBUHtRhonaM6LpS2eiRzIeADTtSfwc6sbqdvpc4BZ4U=
 github.com/BrunoBMelo/handlerhttp v1.0.0/go.mod h1:20t35cHKmRSLR1UdU++cCUi8rQLLt8I3VoVZBjkm+FA=
 github.com/aws/aws-sdk-go-v2 v1.16.2 h1:fqlCk6Iy3bnCumtrLz9r3mJ/2gUT0pJ0wLFVIdWh+JA=

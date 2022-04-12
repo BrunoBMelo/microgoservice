@@ -3,6 +3,7 @@ package offer
 import (
 	"net/http"
 
+	"github.com/BrunoBMelo/converter"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,22 +24,19 @@ type Di struct {
 func ConsortiumOffer(v interface{}) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		env, err := TransformTo[Di](v)
-
+		env, err := converter.To[Di](v)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return
 		}
 
 		var reqInput OfferInput
-
 		if err := c.ShouldBindUri(&reqInput); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 			return
 		}
 
 		result, err := GetConsortiumOffer(c.Request.Context(), env.DB, reqInput.CustomerId)
-
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 			return

@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/BrunoBMelo/appconfig"
 	"github.com/BrunoBMelo/handlerhttp"
-	"github.com/brunobmelo/consortium/appconfig"
 	"github.com/brunobmelo/consortium/offer"
 	"github.com/gin-gonic/gin"
 )
@@ -22,6 +22,6 @@ func init() {
 
 func main() {
 
-	r.Run(":"+cfg.PortApp)
+	r.Run(":" + cfg.PortApp)
 
 }
