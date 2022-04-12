@@ -71,10 +71,10 @@ func getMapsRoutes() []handlerhttp.MapRoute {
 		{
 			HttpMethod:   "GET",
 			RelativePath: "/consortium/offers/:id",
-			HandlerFunc:  ConsortiumOffer,
+			HandlerFunc:  GetConsortiumOffer,
 			IoC: func() interface{} {
-				return Di{
-					DB: mockDb{},
+				return Dependency{
+					Database: mockDb{},
 				}
 			},
 		},
@@ -83,10 +83,10 @@ func getMapsRoutes() []handlerhttp.MapRoute {
 
 type mockDb struct{}
 
-func (mc mockDb) GetItem(ctx context.Context, customerId string) (Offer, error) {
+func (mc mockDb) GetItem(ctx context.Context, customerId string) (OfferModel, error) {
 
 	if customerId == "39819584-50b3-45ee-a4e9-ad4d3607b167" {
-		return Offer{
+		return OfferModel{
 			CustomerId: "39819584-50b3-45ee-a4e9-ad4d3607b167",
 			Available:  "13000.00",
 			Tax:        "0.02",
@@ -95,8 +95,8 @@ func (mc mockDb) GetItem(ctx context.Context, customerId string) (Offer, error) 
 	}
 
 	if customerId == "398195t4-50b3-45ee-a4e9-ad4d3607b167" {
-		return Offer{}, errors.New("error")
+		return OfferModel{}, errors.New("error")
 	}
 
-	return Offer{}, nil
+	return OfferModel{}, nil
 }

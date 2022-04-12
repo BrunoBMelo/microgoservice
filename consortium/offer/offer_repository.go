@@ -14,7 +14,7 @@ type Repository struct {
 	dbClient *dynamodb.Client
 }
 
-func (db Repository) GetItem(ctx context.Context, customerId string) (Offer, error) {
+func (db Repository) GetItem(ctx context.Context, customerId string) (OfferModel, error) {
 
 	result, err := db.dbClient.GetItem(ctx, &dynamodb.GetItemInput{
 		Key: map[string]types.AttributeValue{
@@ -24,18 +24,17 @@ func (db Repository) GetItem(ctx context.Context, customerId string) (Offer, err
 	})
 
 	if err != nil {
-		return Offer{}, err
+		return OfferModel{}, err
 	}
 
 	if len(result.Item) == 0 {
-		return Offer{}, errors.New("customer-id not found")
+		return OfferModel{}, errors.New("customer-id not found")
 	}
 
-	consortiumOffer := Offer{}
+	consortiumOffer := OfferModel{}
 	err = attributevalue.UnmarshalMap(result.Item, &consortiumOffer)
-
 	if err != nil {
-		return Offer{}, err
+		return OfferModel{}, err
 	}
 
 	return consortiumOffer, nil

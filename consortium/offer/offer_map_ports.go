@@ -14,10 +14,10 @@ func GetMapRoutes(cfg appconfig.Config) []handlerhttp.MapRoute {
 		{
 			HttpMethod:   http.MethodGet,
 			RelativePath: "/consortium/offers/:id",
-			HandlerFunc:  ConsortiumOffer,
+			HandlerFunc:  GetConsortiumOffer,
 			IoC: func() interface{} {
-				return Di{
-					DB: NewFromRepository(dynamodb.NewFromConfig(*cfg.AwsConfig)),
+				return Dependency{
+					Database: NewFromRepository(dynamodb.NewFromConfig(*cfg.AwsConfig)),
 				}
 			},
 		},
