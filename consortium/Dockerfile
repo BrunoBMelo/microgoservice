@@ -5,7 +5,9 @@ RUN go mod download && go mod verify
 COPY . .
 RUN CGO_ENABLED=0 go build -ldflags "-s -w" -installsuffix cgo -o /cmd/consortium
 
-FROM gcr.io/distroless/static
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y curl
+COPY --from=build /app/.env /
 COPY --from=build /cmd/consortium /
 EXPOSE 8081
 CMD ["/consortium"]

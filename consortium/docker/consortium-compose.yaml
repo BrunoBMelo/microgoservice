@@ -1,10 +1,14 @@
-version: "3.1"
+version: "3.9"
+
+networks:
+  consortium_app:
+    name: consortium_app
+    driver: bridge
 
 services:
   localstack:
     container_name: "consortium-app"
     image: localstack/localstack:latest
-    network_mode: bridge
     ports:
       - "4566-4599:4566-4599"
     environment:
@@ -17,3 +21,5 @@ services:
       - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
       - /var/run/docker.sock:/var/run/docker.sock
       - ./init-scripts:/docker-entrypoint-initaws.d
+    networks:
+      - consortium_app
