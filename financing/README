@@ -1,0 +1,21 @@
+ 
+ #DRAFT
+ aws dynamodb create-table --cli-input-json file://aws-create-table.json --endpoint-url http://localhost:4566
+
+
+aws --endpoint-url=http://localhost:4566 dynamodb put-item \
+--table-name ConsortiumOffers \
+--item "{\"Id\":{\"S\":\"6de4c121-a5d8-4cfa-8a40-b06fcc2b2a33\"},\"value_offer\":{\"S\":\"4436.01\"},\"tax_offer\":{\"N\":\"0.089\"},\"quota_offer\":{\"N\":\"35\"}}"
+
+
+aws --endpoint-url=http://localhost:4566 \
+        dynamodb scan --table-name consortium-offers >> result.txt
+
+
+          	echo creating table in aws-localstack dynamodb
+	aws dynamodb create-table --cli-input-json file://docker/aws-create-table.json --endpoint-url http://localhost:4566 >> ./docker/aws-dynamodb.txt
+	echo off sleep 5
+
+	echo add datas in table
+	aws --endpoint-url=http://localhost:4566 dynamodb put-item --table-name consortium-offers \
+	--item --cli-input-json file://aws-insert-data.json >> ./docker/aws-dynamodb-result.txt

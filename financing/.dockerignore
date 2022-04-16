@@ -1,0 +1,7 @@
+init-scripts/*
+.env
+Makefile
+README
+.dockerignore
+financing-compose.yaml
+financing-deployment.yaml
