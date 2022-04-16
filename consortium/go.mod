@@ -12,8 +12,6 @@ require (
 	github.com/onsi/gomega v1.19.0
 )
 
-require github.com/BrunoBMelo/appconfig v1.0.3
-
 require (
 	github.com/BrunoBMelo/converter v1.0.0
 	github.com/aws/aws-sdk-go-v2/credentials v1.11.2 // indirect
@@ -33,13 +31,13 @@ require (
 )
 
 require (
+	github.com/BrunoBMelo/appconfig v1.0.5
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.9.0
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
@@ -52,3 +50,5 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
+
+require github.com/joho/godotenv v1.4.0 // indirect

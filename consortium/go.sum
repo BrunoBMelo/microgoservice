@@ -1,9 +1,7 @@
-github.com/BrunoBMelo/appconfig v0.0.0-20220412113747-039fe5f6513d h1:kXqtPf1vQAoZdALa5xWz/9GNJQ7JliOXEhLLQRtBxnQ=
-github.com/BrunoBMelo/appconfig v0.0.0-20220412113747-039fe5f6513d/go.mod h1:siFQR2Iuy7XBM8w3dCAnmU20QbZhp6B4x+KplWjdUlY=
-github.com/BrunoBMelo/appconfig v1.0.2 h1:+GqR0WZciZcVIHZjBOL+4lMMCCAWvNeL7K06ZMjTaUE=
-github.com/BrunoBMelo/appconfig v1.0.2/go.mod h1:siFQR2Iuy7XBM8w3dCAnmU20QbZhp6B4x+KplWjdUlY=
 github.com/BrunoBMelo/appconfig v1.0.3 h1:P8xKcAfR4AgjKwEsNJUDzUHlxUGs+/11wjeXW3o1XkE=
 github.com/BrunoBMelo/appconfig v1.0.3/go.mod h1:siFQR2Iuy7XBM8w3dCAnmU20QbZhp6B4x+KplWjdUlY=
+github.com/BrunoBMelo/appconfig v1.0.5 h1:s5EZylt+WL99JjTJc+ko+K50K8T+YueKqHxrwEuk7u8=
+github.com/BrunoBMelo/appconfig v1.0.5/go.mod h1:siFQR2Iuy7XBM8w3dCAnmU20QbZhp6B4x+KplWjdUlY=
 github.com/BrunoBMelo/converter v1.0.0 h1:VTnezchdwxEd6DVzEfsYjU8L8Etul+LexJWVf2NEIfs=
 github.com/BrunoBMelo/converter v1.0.0/go.mod h1:Z5mMk7GYnKcJALU5cI92QS6E63pWoD7M9zw3d+TRrIg=
 github.com/BrunoBMelo/handlerhttp v1.0.0 h1:XBUHtRhonaM6LpS2eiRzIeADTtSfwc6sbqdvpc4BZ4U=
@@ -14,8 +12,6 @@ github.com/aws/aws-sdk-go-v2/config v1.15.3 h1:5AlQD0jhVXlGzwo+VORKiUuogkG7pQcLJ
 github.com/aws/aws-sdk-go-v2/config v1.15.3/go.mod h1:9YL3v07Xc/ohTsxFXzan9ZpFpdTOFl4X65BAKYaz8jg=
 github.com/aws/aws-sdk-go-v2/credentials v1.11.2 h1:RQQ5fzclAKJyY5TvF+fkjJEwzK4hnxQCLOu5JXzDmQo=
 github.com/aws/aws-sdk-go-v2/credentials v1.11.2/go.mod h1:j8YsY9TXTm31k4eFhspiQicfXPLZ0gYXA50i4gxPE8g=
-github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.8.4 h1:RFvKYpSTejcSLgtPmfy6jY2vxcAC6y2f+gHD2HH99fg=
-github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.8.4/go.mod h1:N7M3jvFFVC8zayueLESAjrsSiak2yYt/b8p4EPsNbaY=
 github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.9.0 h1:OLzgIsMQP3SquFaWtCmRDN2HW8c3Glg8L8CeMNPFwGQ=
 github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.9.0/go.mod h1:N7M3jvFFVC8zayueLESAjrsSiak2yYt/b8p4EPsNbaY=
 github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.3 h1:LWPg5zjHV9oz/myQr4wMs0gi4CjnDN/ILmyZUFYXZsU=
@@ -165,6 +161,8 @@ golang.org/x/net v0.0.0-20210428140749-89ef3d95e781/go.mod h1:OJAsFXCWl8Ukc7SiCT
 golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.0.0-20220225172249-27dd8689420f h1:oA4XRj0qtSt8Yo1Zms0CUlsT3KG69V2UGQWPBxujDmc=
 golang.org/x/net v0.0.0-20220225172249-27dd8689420f/go.mod h1:CfG3xpIq0wQ8r1q4Su4UZFWDARRcnwPjda9FqA0JpMk=
+golang.org/x/net v0.0.0-20220412020605-290c469a71a5 h1:bRb386wvrE+oBNdF1d/Xh9mQrfQ4ecYhW5qJ5GvTGT4=
+golang.org/x/net v0.0.0-20220412020605-290c469a71a5/go.mod h1:CfG3xpIq0wQ8r1q4Su4UZFWDARRcnwPjda9FqA0JpMk=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
@@ -184,8 +182,6 @@ golang.org/x/sys v0.0.0-20210423082822-04245dca01da/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.0.0-20220412015802-83041a38b14a h1:MjZauhfFyuA8jS6CGa4rO215DgesKDIEzMSQ6mm8wW8=
-golang.org/x/sys v0.0.0-20220412015802-83041a38b14a/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20220412211240-33da011f77ad h1:ntjMns5wyP/fN65tdBD4g8J5w8n015+iIIs9rtjXkY0=
 golang.org/x/sys v0.0.0-20220412211240-33da011f77ad/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=

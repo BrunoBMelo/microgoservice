@@ -5,23 +5,13 @@ export TAG_VERSION
 
 set-env:
 	echo 'setting variables'
-	export ENVIRONMENT=dev
-	export PORT=8081
-	export LOCALSTACK_URL=http://consortium-app:4566
-	export LOCALSTACK_AWS_REGION=us-east-1
-	export LOCALSTACK_PARTITION_ID=aws
 
 run-dev: compose-up
-
-	docker run -d \
-		-e PORT=8081 \
-		-e ENVIRONMENT=dev \
-		-e LOCALSTACK_URL=http://consortium-app:4566 \
-		-e LOCALSTACK_AWS_REGION=us-east-1 \
-		-e LOCALSTACK_PARTITION_ID=aws \
-		-p 8081:8081 \
-		--network consortium_app \
-		 bbmello/consortium:$(tag)
+	docker run -d -p 8081:8081 \
+	  -e AWS_DEFAULT_REGION=us-east-1 \
+      -e AWS_ACCESS_KEY_ID=FAKE \
+      -e AWS_SECRET_ACCESS_KEY=FAKE \
+	  --network consortium_app bbmello/consortium:$(tag)
 
 put-data:
 	echo 'add raw data in table create ...'
