@@ -1,13 +1,13 @@
 version: "3.9"
 
 networks:
-  consortium_app:
-    name: consortium_app
+  awsinfralocal_app:
+    name: awsinfralocal_app
     driver: bridge
 
 services:
   localstack:
-    container_name: "consortium-app"
+    container_name: "awsinfralocal-app"
     image: localstack/localstack:latest
     ports:
       - "4566-4599:4566-4599"
@@ -22,4 +22,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./init-scripts:/docker-entrypoint-initaws.d
     networks:
-      - consortium_app
+      - awsinfralocal_app

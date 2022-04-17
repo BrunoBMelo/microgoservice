@@ -1,5 +1,4 @@
 init-scripts/*
-.env
 Makefile
 README
 .dockerignore
