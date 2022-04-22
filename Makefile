@@ -1,4 +1,3 @@
-run-compose:
+compose-up:
 	echo 'starting composes ...'
-	docker-compose -f ./docker/aws-localstack-compose.yaml down --remove-orphans
-	docker-compose -f ./docker/aws-localstack-compose.yaml up -d
+	docker-compose -f ./deploy/aws-localstack-compose.yaml up -d --remove-orphans
